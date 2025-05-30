@@ -1,20 +1,17 @@
 "use client"
 
+import { useState } from "react"
+import { Terminal, User, Code, BookOpen } from "lucide-react"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import Home from "@/components/sections/Home"
+import About from "@/components/sections/About"
+import Projects from "@/components/sections/Projects"
+import { asciiArt } from "./asciiArt"
 
-import {motion} from "framer-motion"
-
-import About from "@/components/sections/About";
-import Home from "@/components/sections/Home";
-import Projects from "@/components/sections/Projects";
-import { Button } from "@/components/ui/button";
-import { BookOpen, Code, Terminal, User } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
-import { asciiArt } from "./asciiArt";
 export default function Portfolio() {
-
   const [selectedSection, setSelectedSection] = useState("home")
-
 
   const tabs = {
     home: {
@@ -34,14 +31,17 @@ export default function Portfolio() {
       content: undefined,
     }
   }
+
   return (
     <div className="min-h-screen bg-background text-purple-blue p-4 md:p-8 font-mono">
+    
       <div className="flex flex-row flex-wrap sm:justify-start justify-center">
         <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-          {asciiArt} 
-        </pre>
+        {asciiArt} 
+      </pre>
       </div>
-      {/* NAviagtion */}
+
+      {/* Navigation */}
       <nav className="my-8 flex flex-wrap gap-4">
         <Button
           variant="ghost"
@@ -75,6 +75,7 @@ export default function Portfolio() {
         </Link>
       </nav>
 
+      {/* Content */}
       <motion.div
         key={selectedSection}
         initial={{ opacity: 0, y: 20 }}
@@ -91,6 +92,8 @@ export default function Portfolio() {
           </div>
         )}
       </motion.div>
-    </div >
-  );
+    </div>
+  )
 }
+
+

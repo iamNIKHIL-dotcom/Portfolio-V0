@@ -1,9 +1,9 @@
+import ProjectCard from "@/components/ProjectCard"
 import projects from "@/content/projects"
-import ProjectCard from "../ProjectCard"
 
-const Projects = () => {
+export default function Projects() {
   return (
-   <>
+    <>
       <h2 className="text-purple-blue text-2xl">Projects</h2>
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project) => (
@@ -20,5 +20,3 @@ const Projects = () => {
     </>
   )
 }
-
-export default Projects
