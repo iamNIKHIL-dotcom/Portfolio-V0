@@ -1,12 +1,16 @@
 "use client"
 
+
+import {motion} from "framer-motion"
+
 import About from "@/components/sections/About";
-import Home from "@/components/sections/home";
+import Home from "@/components/sections/Home";
 import Projects from "@/components/sections/Projects";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Code, Link, Terminal, User } from "lucide-react";
+import { BookOpen, Code, Terminal, User } from "lucide-react";
 import { useState } from "react";
-
+import Link from "next/link";
+import { asciiArt } from "./asciiArt";
 export default function Portfolio() {
 
   const [selectedSection, setSelectedSection] = useState("home")
@@ -34,15 +38,8 @@ export default function Portfolio() {
     <div className="min-h-screen bg-background text-purple-blue p-4 md:p-8 font-mono">
       <div className="flex flex-row flex-wrap sm:justify-start justify-center">
         <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-          {`
-███╗   ██╗██╗██╗  ██╗██╗  ██╗██╗██╗         ██╗   ██╗███╗   ███╗███╗   ███╗██╗██████╗ ██╗
-████╗  ██║██║██║ ██╔╝██║  ██║██║██║         ██║   ██║████╗ ████║████╗ ████║██║██╔══██╗██║
-██╔██╗ ██║██║█████╔╝ ███████║██║██║         ██║   ██║██╔████╔██║██╔████╔██║██║██║  ██║██║
-██║╚██╗██║██║██╔═██╗ ██╔══██║██║██║         ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║██║  ██║██║
-██║ ╚████║██║██║  ██╗██║  ██║██║███████╗    ╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║██║██████╔╝██║
-╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝     ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚═╝╚═════╝ ╚═╝
-
-         `} </pre>
+          {asciiArt} 
+        </pre>
       </div>
       {/* NAviagtion */}
       <nav className="my-8 flex flex-wrap gap-4">
@@ -77,6 +74,23 @@ export default function Portfolio() {
           </Button>
         </Link>
       </nav>
+
+      <motion.div
+        key={selectedSection}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {selectedSection === "home" && tabs.home.content}
+
+        {selectedSection === "about" && tabs.about.content}
+
+        {selectedSection === "projects" && (
+          <div className="space-y-6">
+            {tabs.projects.content}
+          </div>
+        )}
+      </motion.div>
     </div >
   );
 }
