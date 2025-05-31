@@ -1,9 +1,9 @@
+// app/blog/page.tsx
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { ChevronLeft } from "lucide-react"
-import Image from "next/image"
+import BlogImage from "@/components/BlogImage"
 
-// Replace with your actual Medium username
 const MEDIUM_USERNAME = "no-non-sense-guy"
 
 interface MediumPost {
@@ -13,6 +13,23 @@ interface MediumPost {
   thumbnail: string
   categories: string[]
   description: string
+}
+
+function extractFirstImage(html: string): string | null {
+  const imgRegex = /<img[^>]+src="([^">]+)"/g
+  const match = imgRegex.exec(html)
+  if (!match) return null
+  
+  const url = match[1]
+  
+  // Skip tracking images and non-image URLs
+  if (url.includes('medium.com/_/stat') || 
+      url.includes('medium.com%2F_%2Fstat') ||
+      !url.match(/\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i)) {
+    return null
+  }
+  
+  return url
 }
 
 async function getMediumPosts(): Promise<MediumPost[]> {
@@ -27,14 +44,23 @@ async function getMediumPosts(): Promise<MediumPost[]> {
       return []
     }
 
-    return data.items.map((post: any) => ({
-      title: post.title,
-      pubDate: post.pubDate,
-      link: post.link,
-      thumbnail: post.thumbnail || post.featuredImage || "/default-blog.jpg",
-      categories: post.categories,
-      description: post.description.replace(/<[^>]+>/g, "").substring(0, 100) + "..."
-    }))
+    return data.items.map((post: any) => {
+      let thumbnail = extractFirstImage(post.description)
+      
+      // If no valid image found, use default
+      if (!thumbnail || !thumbnail.startsWith("http")) {
+        thumbnail = "/default-blog.jpg"
+      }
+      
+      return {
+        title: post.title,
+        pubDate: post.pubDate,
+        link: post.link,
+        thumbnail,
+        categories: post.categories || [],
+        description: post.description.replace(/<[^>]+>/g, "").substring(0, 100) + "..."
+      }
+    })
   } catch (error) {
     console.error("Error fetching Medium posts:", error)
     return []
@@ -63,7 +89,7 @@ export default async function BlogPage() {
             >
               <Card className="h-full flex flex-col bg-card border-card-border overflow-hidden">
                 <div className="relative h-48">
-                  <Image 
+                  <BlogImage 
                     src={post.thumbnail} 
                     alt={post.title}
                     fill
@@ -72,16 +98,18 @@ export default async function BlogPage() {
                   />
                 </div>
                 <div className="p-5 flex flex-col flex-grow">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {post.categories.slice(0, 3).map((tag) => (
-                      <span 
-                        key={tag} 
-                        className="px-2 py-1 text-xs rounded-md bg-tag-background text-purple"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {post.categories && post.categories.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {post.categories.slice(0, 3).map((tag) => (
+                        <span 
+                          key={tag} 
+                          className="px-2 py-1 text-xs rounded-md bg-tag-background text-purple"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <h2 className="text-xl font-semibold text-purple-blue mb-2 line-clamp-2">
                     {post.title}
                   </h2>
