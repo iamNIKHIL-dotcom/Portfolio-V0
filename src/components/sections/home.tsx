@@ -1,4 +1,4 @@
-import { Github, Linkedin, StickyNote, Youtube } from "lucide-react"
+import { Github, Linkedin, Mail, StickyNote, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Projects from "@/components/sections/Projects"
@@ -20,7 +20,12 @@ export default function Home() {
       title: "Medium",
       href: "https://medium.com/@no-non-sense-guy",
       icon: <StickyNote className="w-4 h-4" />
-    }
+    },
+    {
+    title: "Gmail",
+    href: "https://mail.google.com/mail/u/0/?view=cm&fs=1&to=ummidinikhil@gmail.com",
+    icon: <Mail className="w-4 h-4" /> // Replace with a mail icon
+  }
 
   ]
 
