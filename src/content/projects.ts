@@ -29,6 +29,13 @@ const projects: Project[] = [
     liveLink: "",
     devLink: "https://github.com/iamNIKHIL-dotcom/collab-draw",
   },
+  {
+    title: "Meme-hub",
+    description:"MemeHub is a dynamic web application designed for effortless meme creation using custom templates.",
+    tags:["TypeScript","NextJs", "canvas"],
+    liveLink:"https://github.com/iamNIKHIL-dotcom/meme-hub",
+    devLink:"https://meme-hub-g4ad.vercel.app/",
+  }
 
 
 ]

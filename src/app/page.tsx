@@ -9,6 +9,7 @@ import Home from "@/components/sections/Home"
 import About from "@/components/sections/About"
 import Projects from "@/components/sections/Projects"
 import { asciiArt } from "./asciiArt"
+import TypedText from "@/components/Typed-Text"
 
 export default function Portfolio() {
   const [selectedSection, setSelectedSection] = useState("home")
@@ -34,11 +35,25 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-background text-purple-blue p-4 md:p-8 font-mono">
-    
       <div className="flex flex-row flex-wrap sm:justify-start justify-center">
-        <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-        {asciiArt} 
-      </pre>
+        <div className="text-green text-xs md:text-sm lg:text-base">
+          <pre className="whitespace-pre overflow-x-auto m-0">{asciiArt}</pre>
+          <div className="text-yellow-200">
+           <TypedText
+  strings={[
+    'I build <span class="text-red-500 font-semibold">full-stack</span> projects.',
+    '私は <span class="text-red-500 font-semibold">フルスタック</span> プロジェクトを構築します。',
+  ]}
+  typeSpeed={60}
+  backSpeed={40}
+  loop
+  showCursor
+  smartBackspace
+  contentType="html"
+/>
+
+          </div>
+        </div>
       </div>
 
       {/* Navigation */}
@@ -83,9 +98,7 @@ export default function Portfolio() {
         transition={{ duration: 0.3 }}
       >
         {selectedSection === "home" && tabs.home.content}
-
         {selectedSection === "about" && tabs.about.content}
-
         {selectedSection === "projects" && (
           <div className="space-y-6">
             {tabs.projects.content}
