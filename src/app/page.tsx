@@ -37,21 +37,24 @@ export default function Portfolio() {
     <div className="min-h-screen bg-background text-purple-blue p-4 md:p-8 font-mono">
       <div className="flex flex-row flex-wrap sm:justify-start justify-center">
         <div className="text-green text-xs md:text-sm lg:text-base">
-          <pre className="whitespace-pre overflow-x-auto m-0">{asciiArt}</pre>
-          <div className="text-yellow-200">
-           <TypedText
-  strings={[
-    'I build <span class="text-red-500 font-semibold">full-stack</span> projects.',
-    '私は <span class="text-red-500 font-semibold">フルスタック</span> プロジェクトを構築します。',
-  ]}
-  typeSpeed={60}
-  backSpeed={40}
-  loop
-  showCursor
-  smartBackspace
-  contentType="html"
-/>
+          <div className="w-full text-left text-xs sm:text-sm md:text-base lg:text-lg">
 
+            <pre className="whitespace-pre">{asciiArt}</pre>
+          </div>
+          <div className="text-yellow-200 text-left text-xs sm:text-sm md:text-base lg:text-lg w-full">
+
+            <TypedText
+              strings={[
+                'I build <span class="text-red-500 font-semibold">full-stack</span> projects.',
+                '私は <span class="text-red-500 font-semibold">フルスタック</span> プロジェクトを構築します。',
+              ]}
+              typeSpeed={60}
+              backSpeed={40}
+              loop
+              showCursor
+              smartBackspace
+              contentType="html"
+            />
           </div>
         </div>
       </div>
