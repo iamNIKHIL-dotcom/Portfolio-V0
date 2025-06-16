@@ -60,7 +60,7 @@ export default function BlogPage() {
           throw new Error("Unexpected Medium API response");
         }
 
-        const formattedPosts = data.items.map((post: any) => {
+        const formattedPosts = data.items.map((post: MediumPost) => {
           let thumbnail = extractFirstImage(post.description);
           
           // If no valid image found, use default

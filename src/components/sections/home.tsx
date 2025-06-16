@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, StickyNote, Youtube } from "lucide-react"
+import { Github, Linkedin, Mail, StickyNote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Projects from "@/components/sections/Projects"
